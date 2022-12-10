@@ -1,12 +1,17 @@
-FROM missemily22/multifbot:latest
+RUN apt update && apt upgrade -y
 
-pip install --root-user-action=ignore
-COPY requirements.txt requirements.txt
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN apt install git -y
 
-RUN playwright install chromium
-RUN playwright install-deps
+COPY requirements.txt /requirements.txt
 
-COPY . .
+RUN cd /
 
-CMD ["bash","start.sh"]
+RUN pip3 install -U pip && pip3 install -U -r requirements.txt
+
+RUN mkdir /EvaMaria
+
+WORKDIR /EvaMaria
+
+COPY start.sh /start.sh
+
+CMD ["/bin/bash", "/start.sh"]
