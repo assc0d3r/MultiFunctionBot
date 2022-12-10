@@ -1,5 +1,5 @@
 services:
-  multi-bot:
+  dockerfile:
     public: true
     build: .
     resources:
