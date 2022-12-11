@@ -8,4 +8,4 @@ services:
       - CONFIG_FILE_URL = ${CONFIG_FILE_URL}
     ports:
       - 8080:8080
-    restart: unless-stopped
+    restart: unless-stopped 
