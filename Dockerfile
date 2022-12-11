@@ -1,17 +1,16 @@
-RUN apt update && apt upgrade -y
+FROM missemily22/multifbot:latest
 
-RUN apt install git -y
+WORKDIR /usr/src/app
+SHELL ["/bin/bash", "-c"]
+RUN chmod 777 /usr/src/app
 
-COPY requirements.txt /requirements.txt
 
-RUN cd /
+COPY requirements.txt requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-RUN pip3 install -U pip && pip3 install -U -r requirements.txt
+RUN playwright install chromium
+RUN playwright install-deps
 
-RUN mkdir /EvaMaria
+COPY . .
 
-WORKDIR /EvaMaria
-
-COPY start.sh /start.sh
-
-CMD ["/bin/bash", "/start.sh"]
+CMD ["bash","start.sh"]
